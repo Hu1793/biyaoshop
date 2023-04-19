@@ -1,7 +1,8 @@
 <template>
 	<view class="search_box bgc_fff">
 		<image class="search_icon pos_a" src="http://www.liwanying.top/applate-icon/icon_search.png" mode=""></image>
-		<input class="search_input bgc_f8f8f8 boxs_bb" placeholder="请输入商品"/>
+		<input class="search_input bgc_f8f8f8 boxs_bb" placeholder="请输入商品1111111111511515"/>
+		<button>点击</button>
 	</view>
 </template>
 
