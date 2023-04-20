@@ -32,6 +32,20 @@
 		reactive,
 		computed
 	} from 'vue';
+	import {getGoodList} from '@/api/api_method.js' 
+	import { onLoad } from '@dcloudio/uni-app'
+	
+	let neirong = ref([])
+	
+	// const a = async() => {
+	// 	let res = await getGoodList()
+	// 	console.log(res);
+	// 	neirong.value=res
+	// }
+	// onLoad(() => {
+	//   a()
+	// })
+	
 	const data = reactive({
 		list: [{
 				image: 'https://via.placeholder.com/200x500.png/ff0000',

@@ -17,10 +17,27 @@
 	import homeGrid from './components/home-grid.vue'
 	import homeFlow from './components/home-flow.vue'
 	import {ref} from 'vue'
+	import { onLoad } from '@dcloudio/uni-app'
+	import {getHome} from '@/api/api_method.js'
 	let tabIndex = ref(0)
+	let fenlei = ref([])
 	const getTab = (id) => {
 		console.log(id)
 	}
+	const a = async() => {
+		let res = await getHome()
+		// console.log(res);
+		// fenlei.value = res.data.
+		// console.log(fenlei.value );
+		
+	}
+	onLoad(() => {
+	  a()
+	})
+	// onLoad(){
+	// 	this.a()
+	// }
+	
 </script>
 
 <style lang="scss" scoped>
