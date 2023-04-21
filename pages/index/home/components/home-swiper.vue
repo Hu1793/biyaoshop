@@ -24,9 +24,9 @@
 	
 	let banner=async()=>{
 		let res = await getHome()
-		console.log(res);
+		// console.log(res);
 		bannerList.value=res.data.homeData.banners
-		console.log(bannerList.value);
+		// console.log(bannerList.value);
 	}
 	
 	onLoad(()=>{

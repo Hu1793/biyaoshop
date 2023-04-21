@@ -9,7 +9,7 @@ export function getHome() {
 		method: 'GET'
 	})
 };
-export function getHomeList (page =1){
+export function getHomeList (page){
     return axios({
         method: 'get',
         url: "/by/hotList?page=" + page
@@ -17,9 +17,28 @@ export function getHomeList (page =1){
 }
 
 
-export function getGoodList (){
+export function getGoodList (type_one){
 return axios({
 	method:'get',
-	url:'/by/goodList'
+	url:'/by/goodList',
+	data:{
+		type_one
+	}
+})
+}
+
+// 详情页
+export function detail (id){
+return axios({
+	method:'get',
+	url:'/by/detail?goodId='+id,
+})
+}
+
+// 搜索页面
+export function search (word){
+return axios({
+	method:'get',
+	url:'/by/search?word='+word,
 })
 }

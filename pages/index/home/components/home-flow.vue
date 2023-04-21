@@ -1,29 +1,15 @@
 <template>
 	<view class="flow_box">
-		<!-- <button class="btn" type="default" @click="add()">增加数据</button> -->
-		<custom-waterfalls-flow-vue3-2 @tapClick="tapClick" :value="data.list" :column="column" :columnSpace="2" :seat="2"
-			>
-			<!-- #ifdef MP-WEIXIN -->
-			<view class="item" v-for="(item,index) in data.list" :key="index" :slot="`slot${index}`">
-				<view class="title m_b_16 color_333 font_28 text_nowrap_2">{{item.title}}</view>
-				<view class="flex-aic flexr-jsb color_ff0003">
-					<view><text class="font_16">¥</text><text class="font_28">299</text></view>
-					<text class="color_999 font_22">已售99999+</text>
-				</view>
+		<view class="safeBox" >
+			<view class="shopbox" v-for="(item,index) in neirong" @click="tapClick(item.Id)">
+				<image :src="item.imageUrl" mode="" class="img"></image>
+					<p class="price">￥{{item.priceStr}}</p>
+					<text class="baopin">爆品</text>
+					<text class="yqp">一起拼</text>
+					<p class="zzs">{{item.title}}</p>
+					<p class="hp">{{item.evaluate}}条好评</p>
 			</view>
-			<!-- #endif -->
-			<!-- #ifndef MP-WEIXIN -->
-			<template #card="cardData">
-				<view class="item" >
-					<view class="title m_b_16 color_333 font_28 text_nowrap_2">{{cardData.data.title}}</view>
-					<view class="flex-aic flexr-jsb color_ff0003">
-						<view><text class="font_16">¥</text><text class="font_28">299</text></view>
-						<text class="color_999 font_22">已售99999+</text>
-					</view>
-				</view>
-			</template>
-			<!-- #endif -->
-		</custom-waterfalls-flow-vue3-2>
+		</view>
 	</view>
 </template>
 <script setup>
@@ -32,85 +18,78 @@
 		reactive,
 		computed
 	} from 'vue';
-	import {getGoodList} from '@/api/api_method.js' 
+	import {getHomeList} from '@/api/api_method.js' 
 	import { onLoad } from '@dcloudio/uni-app'
 	
 	let neirong = ref([])
+	let page = ref(1)
 	
-	// const a = async() => {
-	// 	let res = await getGoodList()
-	// 	console.log(res);
-	// 	neirong.value=res
-	// }
-	// onLoad(() => {
-	//   a()
-	// })
-	
-	const data = reactive({
-		list: [{
-				image: 'https://via.placeholder.com/200x500.png/ff0000',
-				title: '睡裙女夏季冰丝睡衣少女士性感',
-			},
-			{
-				image: 'https://via.placeholder.com/200x200.png/2878ff',
-				title: '古驰香水',
-			},
-			{
-				image: 'https://via.placeholder.com/200x100.png/FFB6C1',
-				title: '古驰香水',
-			},
-			{
-				image: 'https://via.placeholder.com/200x300.png/9400D3',
-				title: '古驰香水',
-			},
-			{
-				image: 'https://via.placeholder.com/100x240.png/B0E0E6',
-				title: '古驰香水古驰香水古驰香水古驰香水古驰香水',
-			},
-			{
-				image: 'https://via.placeholder.com/140x280.png/7FFFAA',
-				title: '古驰香水',
-			},
-			{
-				image: 'https://via.placeholder.com/40x60.png/EEE8AA',
-				title: '古驰香水',
-			},
-		]
-	})
-	const column = ref(2);
-
-	function add() {
-		const newArr = [{
-				image: 'https://via.placeholder.com/58x100.png/FF7F50',
-				title: '我是标题8',
-			},
-			{
-				image: 'https://via.placeholder.com/59x100.png/C0C0C0',
-				title: '我是标题9',
-			},
-			{
-				image: 'https://via.placeholder.com/60x100.png/FAEBD7',
-				title: '我是标题10',
-			}
-		]
-		data.list = data.list.concat(newArr);
+	const a = async() => {
+		let res = await getHomeList(page.value)
+		// console.log(res);
+		neirong.value=res.data
+		console.log(neirong.value);
 	}
+	onLoad(() => {
+	  a()
+	})
+	
+	
+	
+	
 	const tapClick = (item) => {
 		console.log(item)
 		uni.navigateTo({
-			url: '/pages/goodsDetails/goodsDetails'
+			url: '/pages/goodsDetails/goodsDetails?id='+item
 		})
 	}
 </script>
 <style lang="scss" scoped>
 	.flow_box {
 		padding: 0 32rpx;
-	}
-	.item {
-		padding-top: 16rpx;
-		.title {
-			max-height: 72rpx;
-			line-height: 28rpx;
+		.safeBox{
+			width: 700rpx;
+			margin: auto;
 		}
+		.shopbox{
+			float: left;
+			margin-right: 50rpx;
+			margin-bottom: 30rpx;
+			padding-bottom: 40rpx;
+			
+			.img{
+				width: 300rpx;
+				height: 250rpx;
+			}
+			.price{
+				color: #f7a701;
+			}
+			.baopin{
+				    background: rgb(171, 127, 209);
+				    color: rgb(255, 255, 255);
+				    border: 0.015rem solid rgb(171, 127, 209);
+				    border-radius: 2px;
+					margin-right: 20rpx;
+					font-size: 20rpx
+			}
+			.yqp{
+				    background: rgb(255, 255, 255);
+				    color: rgb(251, 76, 129);
+				    border: 0.015rem solid rgb(251, 76, 129);
+				    border-radius: 2px;
+					font-size: 20rpx
+			}
+			.zzs{
+				    color:#4a4a4a;
+				    margin-bottom: 0.08rem;
+				    font-size: 24rpx;
+			}
+			.hp{
+				    color: #bbbbbb;
+				    font-size: 0.2rem;
+				    padding-top: 0.06rem;
+			}
+		}
+	
 	}
 </style>

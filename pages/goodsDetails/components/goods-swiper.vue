@@ -2,14 +2,9 @@
 	<view style="padding: 24rpx 0 20rpx;" class="bgc_fff">
 		<swiper class="swiper" circular indicator-active-color="#fff" indicator-color="rgba(255,255,255,0.6)"
 			:indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item class="swiper-item flexr-jsc flex-aic">
+			<swiper-item class="swiper-item flexr-jsc flex-aic" v-for="(item,index) in banner">
 				<image mode="aspectFill" class="swiper-item-img"
-					src="https://m.360buyimg.com/mobilecms/s750x750_jfs/t1/124394/24/30277/122521/63e653e5Fe19a2e7a/7ecf692713c6d48e.jpg">
-				</image>
-			</swiper-item>
-			<swiper-item class="swiper-item flexr-jsc flex-aic">
-				<image mode="aspectFill" class="swiper-item-img"
-					src="https://m.360buyimg.com/mobilecms/s843x843_jfs/t1/50959/32/23475/137403/63e6530cF5421a049/55285d2300cf7e39.jpg">
+					:src="item">
 				</image>
 			</swiper-item>
 		</swiper>
@@ -17,7 +12,22 @@
 </template>
 
 <script setup>
+	import {detail} from '@/api/api_method.js'
+	import {onLoad} from '@dcloudio/uni-app';
+	import {ref,reactive} from 'vue'
 	
+	let banner = ref([])
+	
+	 onLoad(async (options)=>{
+		let ids=options.id
+		let res =await detail(ids)
+		
+		let imgs = res.data[0].imgs
+		// console.log(JSON.parse(imgs) );
+		banner.value= JSON.parse(imgs)
+		
+	})
+ 	
 </script>
 
 <style lang="scss" scoped>

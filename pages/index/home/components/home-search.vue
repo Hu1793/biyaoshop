@@ -1,11 +1,29 @@
 <template>
 	<view class="search_box bgc_fff">
 		<image class="search_icon pos_a" src="http://www.liwanying.top/applate-icon/icon_search.png" mode=""></image>
-		<input class="search_input bgc_f8f8f8 boxs_bb" placeholder="请输入商品"/>
+		<input class="search_input bgc_f8f8f8 boxs_bb" @input="input" confirm-type="search" @confirm="doSearch" v-model="title" placeholder="请输入商品"/>
 	</view>
 </template>
 
 <script setup>
+	import {ref,reactive} from 'vue'
+	import {search} from '@/api/api_method.js'
+	let title=ref('')
+	let sousuo=ref('')
+	
+	let input=()=>{
+			if(title.value==''){
+				console.log('不能为空');
+			}else{
+				sousuo.value=title.value
+			}
+	}
+	let doSearch=()=>{
+		
+		uni.navigateTo({
+			url:'/pages/sousuo/sousuo?title='+sousuo.value
+		})
+	}
 	
 </script>
 

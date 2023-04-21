@@ -5,7 +5,8 @@
 			"style": {
 				"navigationBarBackgroundColor": "#fff",
 				"navigationBarTitleText": "首页",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"onReachBottomDistance": 50
 			}
 
 		}, {
@@ -178,6 +179,15 @@
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "优惠券",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/sousuo/sousuo",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
                 "enablePullDownRefresh": false
             }
             
