@@ -8,7 +8,7 @@
 					mode="aspectFill"></image>
 				<view class="flex-fitem">
 					<view class="m_b_16 flex flex-aife color_fff">
-						<text class="font_36 m_r_16">铃铃铃</text>
+						<text class="font_36 m_r_16">{{arr}}</text>
 						<view class="font_20 my_binding_box m_b_8">已绑定</view>
 					</view>
 					<view  class="color_fff font_28">18888888888</view>
@@ -67,7 +67,10 @@
 
 <script setup>
 import myTools from './components/my-tools.vue'
+import { onLoad } from '@dcloudio/uni-app'
 import {ref} from 'vue'
+let arr = ref('')
+let add = ref('')
 const columns = ref([{
 	title:'我的秒杀',
 	pages:'',
@@ -108,6 +111,11 @@ const toRetreatOrder = () => {
 		url: '/pages/retreat/retreatOrder'
 	})
 }
+onLoad((option)=>{
+	console.log(option);
+		arr.value = option.a
+		add.value = option.aa
+})
 </script>
 
 <style lang="scss">

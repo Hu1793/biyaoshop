@@ -1,45 +1,131 @@
 <template>
 	<view>
-		<view class="integral_user boxs_bb bgc_ff7000 pos_r">
-			<view class="flex flex-aic">
-				<image class="integral_user_img m_r_24"
-					src="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fc-ssl.duitang.com%2Fuploads%2Fblog%2F202106%2F13%2F20210613214313_618dc.thumb.1000_0.jpg&refer=http%3A%2F%2Fc-ssl.duitang.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1679213838&t=0f90af10356a997041f6a3b109d4f539"
-					mode=""></image>
-				<view class="flex-fitem">
-					<view class="m_b_16 color_fff font_36 font_bold">铃铃铃</view>
-					<view @tap="toIntegral">
-						<text class="m_r_16 color_fff font_28">当前积分：5652</text>
-						<image style="width: 10rpx;height: 18rpx;"
-							src="http://www.liwanying.top/applate-icon/gengduo.png" mode="">
-						</image>
-					</view>
-				</view>
-			</view>
-			<image class="integral_turn_img pos_a"
-				src="http://www.liwanying.top/applate-icon/zhibojifenzhuanhuan.png"
-				mode="aspectFill"></image>
-		</view>
+		
+		
+	
 		<view class="goods_search_box bgc_fff flex-aic flexr-jsc">
 			<view class="search_box pos_r boxs_bb">
 				<image class="search_icon pos_a" src="http://www.liwanying.top/applate-icon/icon_search.png" mode=""></image>
 				<input class="search_input bgc_f8f8f8 boxs_bb" placeholder="请输入商品"/>
 			</view>
 		</view>
-		<goods-flow></goods-flow>
+		<view class="qq">
+			<view class="qqq">
+				<view class="kk"  v-for="(item,index) in shuju" :key="index" >
+					 <view class="oo" @click="dd(item)">
+						{{item}}
+					</view>
+				</view>
+			</view>
+			<view class="ppp">
+				<view >
+					{{name}}
+				</view>
+				<view class="gengduo">
+						<view class="geng">
+							<text>{{name}}</text>
+							<text>更多</text>
+						</view>
+						<view >
+							<view >
+				<button class="wws" @click="ddd(item)" v-for="(item,index) in neishuju" :key="index" > {{item}}</button>
+									<view v-for="(ii,cc) in neishuju2" :key="cc" >
+										<view >
+											<image :src="ii.imageUrl" mode=""></image>
+										</view>
+										{{ii.title}}
+									</view>
+							</view>
+						</view>
+				</view>
+			</view>
+		</view>
+		
 		<lyz-tab-bar pagePath="pages/tabbar/good/good"></lyz-tab-bar>
 	</view>
 </template>
 
 <script setup>
-import goodsFlow from './components/goods-flow.vue'
-const toIntegral = () => {
-	uni.navigateTo({
-		url: '/pages/integral/integral'
-	})
-}
+import { onLoad } from '@dcloudio/uni-app'
+import {ref ,watch} from 'vue'
+import {getGoodList,getTypeTwo, goodList,getTypeTwoList} from '@/api/api_method.js'
+	let shuju = ref([])
+	let neishuju = ref([])
+	let neishuju2 = ref([])
+	let neishuju3 = ref('')
+	let name = ref('个护')
+	let canshu1 = ref('')
+	let canshu2 = ref('')
+	let canshu3 = ref('')
+	const ass = async() =>{
+		 let add = await getGoodList()
+		 console.log(add.data);
+			shuju.value = add.data
+		}
+	 let  dd = (x)=>{
+		 console.log(neishuju3.value);
+		neishuju2.value = []
+		console.log(canshu1.value);
+			name.value = x
+			
+		aa(x),
+		aaa(name.value,neishuju3.value)
+	}
+	let  ddd = (x)=>{
+		console.log(x);
+		aaa(name.value,x)
+		
+		
+	
+	}
+	const aa = async(x) =>{
+			 let add = await getTypeTwo(x)
+			 console.log(add);
+			 console.log(add.data[0]);
+				neishuju.value = add.data
+				neishuju3.value = add.data[0]
+			}
+	const aaa = async(a,aa) =>{
+			 let add = await getTypeTwoList(a,aa)
+			 console.log(add.data);
+			neishuju2.value = add.data
+				
+			}
+
+		onLoad(()=>{
+			console.log(name.value);
+				aa(name.value),
+			ass()
+		
+			
+		})
 </script>
 
 <style lang="scss" scoped>
+	.wws{
+		width: 100%;
+		text-align:center;
+		
+	}
+	.qq{
+		width: 100vw;
+		display: flex;
+		justify-content: space-around;
+	}
+	.qqq{
+		width: 30%;
+		display: block;
+		.kk{
+			width: 100%;
+			.oo{
+				padding: 10rpx 0;
+			}
+		}
+	}
+	.ppp{
+		width: 70%;
+		text-align: center;
+	}
 	.integral_user {
 		padding: 28rpx 32rpx 0;
 		height: 228rpx;

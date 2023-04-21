@@ -1,12 +1,13 @@
 <template>
 	<view>
 		<home-search></home-search>
+		<view class="tabs_box">
+			<lyz-tabs type="scroll" v-model="tabIndex" @change="(item) => getTab(item.id)" :columns="[{title:'热门',id:'4'},{title:'休闲鞋',id:'5'},{title:'内衣',id:'2'},{title:'男装',id:'3'},{title:'女装',id:'6'},{title:'家用电器',id:'7'}]"></lyz-tabs>
+		</view>
 		<home-swiper></home-swiper>
 		<home-grid></home-grid>
-		<image class="bar_box" src="http://www.liwanying.top/applate-icon/bar.png" mode="widthFix"></image>
-		<view class="tabs_box">
-			<lyz-tabs type="scroll" v-model="tabIndex" @change="(item) => getTab(item.id)" :columns="[{title:'猜你喜欢',id:'4'},{title:'休闲鞋',id:'5'},{title:'内衣',id:'2'},{title:'男装',id:'3'},{title:'女装',id:'6'},{title:'家用电器',id:'7'}]"></lyz-tabs>
-		</view>
+		
+	
 		<home-flow></home-flow>
 	</view>
 </template>
@@ -18,7 +19,7 @@
 	import homeFlow from './components/home-flow.vue'
 	import {ref} from 'vue'
 	import { onLoad } from '@dcloudio/uni-app'
-	import {getHome} from '@/api/api_method.js'
+	import { getHome } from '@/api/api_method.js'
 	let tabIndex = ref(0)
 	let fenlei = ref([])
 	const getTab = (id) => {
@@ -26,7 +27,7 @@
 	}
 	const a = async() => {
 		let res = await getHome()
-		// console.log(res);
+		console.log(res);
 		// fenlei.value = res.data.
 		// console.log(fenlei.value );
 		

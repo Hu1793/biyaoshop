@@ -18,6 +18,15 @@
 			}
 
 		}, {
+			"path": "pages/tabbar/login/login",
+			"style": {
+				"navigationBarTitleText": "登录",
+				"navigationBarTextStyle": "white",
+				"navigationBarBackgroundColor": "#fe5572",
+				"enablePullDownRefresh": false
+			}
+
+		}, {
 			"path": "pages/tabbar/shop/shop",
 			"style": {
 				"navigationBarTitleText": "购物车",
@@ -28,7 +37,7 @@
 		}, {
 			"path": "pages/tabbar/good/good",
 			"style": {
-				"navigationBarTitleText": "积分商城",
+				"navigationBarTitleText": "分类",
 				"navigationBarTextStyle": "white",
 				"navigationBarBackgroundColor": "#fe5572",
 				"enablePullDownRefresh": false
@@ -182,6 +191,7 @@
             }
             
         }
+		
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
@@ -203,7 +213,7 @@
 			},
 			{
 				"pagePath": "pages/tabbar/good/good",
-				"text": "积分商城"
+				"text": "分类"
 			},
 			{
 				"pagePath": "pages/tabbar/shop/shop",
@@ -215,11 +225,15 @@
 			}
 		]
 	},
-	"uniIdRouter": {},
+	"uniIdRouter": {
+		
+	},
 	"easycom": {
 		"autoscan": true,
 		"custom": {
 			"lyz-(.*)": "@/components/lyz-ui/lyz-$1/lyz-$1.vue" // 匹配lyz-ui内的vue文件
 		}
 	}
+	
+	
 }
